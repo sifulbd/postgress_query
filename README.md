@@ -40,3 +40,53 @@ CHAR হলো fixed size ডেটা টাইপ, আর VARCHAR হলো va
 CHAR ডেটা টাইপে ডেটা সবসময় নির্দিষ্ট লেংথ(length) সংরক্ষণ করা হয় যেমন: আপনি যদি CHAR(10) দেন এবং "abc" লিখেন, তাহলে PostgreSQL সেটিকে "abc " অর্থাৎ শেষে ৭টি স্পেস(space) যোগ করে সংরক্ষণ করবে। অন্যদিকে, VARCHAR ডেটা টাইপে ডেটার লেংথ পরিবর্তনশীল যেমন: VARCHAR(10) দিলে আপনি "abc" লিখলে ঠিক "abc"-ই সংরক্ষণ হবে, কোনো স্পেস প্যাড করা হবে না।
 
 ## #4 Explain the purpose of the WHERE clause in a SELECT statement
+
+### SQL WHERE Clause
+
+SQL এর WHERE clause হচ্ছে SQL (Structured Query Language)-এর একটি মৌলিক অংশ, যেটা ব্যবহার করা হয় ডাটাবেস টেবিল থেকে নির্দিষ্ট শর্ত বা একাধিক শর্তের ভিত্তিতে specific row গুলো filter এবং retrieve করার জন্য। এটি আপনাকে শুধুমাত্র সেই ডেটাগুলো extract করতে সাহায্য করে যেগুলো আপনার defined criteria অনুযায়ী মিলে যায়। এর মাধ্যমে আপনি আপনার SQL query-গুলোর উপর আরও বেশি control পান এবং ডেটার নির্দিষ্ট subset নিয়ে কাজ করতে পারেন।
+
+### SQL WHERE Clause ব্যবহার
+
+আপনি SQL WHERE clause ব্যবহার করবেন তখন, যখন কোনো query-র ফলাফলকে নির্দিষ্ট কিছু condition অনুযায়ী সীমাবদ্ধ করতে চান। যেমন:
+
+-   Data Filtering : একটি টেবিল থেকে শুধু সেই row গুলো extract করতে যখন প্রয়োজন যেগুলো নির্দিষ্ট criteria পূরণ করে।
+    উদাহরণ: এমন সব employee বের করা যাদের job title নির্দিষ্ট।
+
+-   Data Retrieval : নির্দিষ্ট date range, numerical comparison বা string matching pattern অনুযায়ী record বের করার জন্য। যেমন: যেসব অর্ডার ২০২৪ সালের জানুয়ারি থেকে মার্চের মধ্যে হয়েছে।
+
+-   Data Modification : যখন আপনি কিছু row আপডেট বা ডিলিট করতে চান নির্দিষ্ট condition অনুযায়ী। উদাহরণ: যেসব product-এর price নির্দিষ্ট সীমার বেশি, তাদের status আপডেট করা।
+
+-   Data Joins: যখন আপনি একাধিক টেবিল JOIN করছেন এবং combined result থেকে নির্দিষ্ট ডেটা filter করতে চান।
+
+### SQL WHERE Clause এর সিনট্যাক্স
+
+SQL WHERE clause এর basic syntax হলো
+
+````
+    SELECT column1, column2,
+    FROM table_name
+    WHERE condition;
+
+```
+SELECT এ যেসব column থেকে ডেটা আনতে চান, সেগুলো এখানে উল্লেখ করার জন্য। FROM এর হলো কোন table থেকে ডেটা আনবেন, তা এখানে ডিফাইন করার জন্য । WHERE এ এমন একটি condition লিখবেন, যেটা ঠিক করে দিবে কোন row গুলো রেজাল্টে থাকবে।
+
+WHERE clause-এর ভিতরের condition বিভিন্ন operator এবং value দিয়ে গঠিত হতে পারে। যেমন:
+
+- তুলনামূলক অপারেটর (Comparison Operators): = (সমান), <> (সমান নয়), < (কম), > (বেশি), <= (কম বা সমান), >= (বেশি বা সমান)
+- যুক্তির অপারেটর (Logical Operators): AND (উভয় শর্ত সত্য হতে হবে), OR (যেকোনো একটি শর্ত সত্য হলেই চলবে), NOT (শর্ত সত্য না হলে)
+- Wildcards এবং Matching : LIKE (pattern অনুযায়ী মিল খোঁজে, যেমন % বা _ ব্যবহার করে), IN (একাধিক মানের মধ্যে যদি কোনোটি মিলে), BETWEEN (দুইটি মানের মধ্যে থাকলে)
+- NULL Value Handling : IS NULL (কোনো মান নেই এমন চেক করতে), IS NOT NULL (যেখানে মান আছে, তা চেক করতে)
+
+Example:
+
+````
+
+    SELECT name, salary
+    FROM employees
+    WHERE salary > 50000 AND department = 'Sales';
+
+```
+
+
+## #5
+```
