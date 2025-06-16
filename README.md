@@ -85,3 +85,50 @@ Example:
     WHERE age > 18 AND department = 'engineering';
 
 ```
+
+## #5 Explain the GROUP BY clause and its role in aggregation operations.
+
+#### GROUP BY Clause in SQL:
+
+GROUP BY clause SQL-এর একটি গুরুত্বপূর্ণ অংশ যা aggregation operations এর সাথে ব্যবহার হয় । যেমন COUNT(), SUM(), AVG(), MAX(), MIN() ইত্যাদি। এটি একটি টেবিলের Raw গুলোকে এক বা একাধিক column অনুযায়ী গ্রুপ (group) করে । তারপর প্রতিটি গ্রুপের উপর aggregate function প্রয়োগ করে summary data তৈরি করে । এটি বড় ডেটাসেট থেকে তথ্য বের করতে অপরিহার্য একটি টুল।
+
+-   GROUP BY এর সাথে ব্যবহৃত Aggregate Functions:
+-   COUNT() – কতগুলো row আছে
+-   SUM() – যোগফল
+-   AVG() – গড়
+-   MAX() – সর্বোচ্চ মান
+-   MIN() – সর্বনিম্ন মান
+
+উদাহরণ:
+
+আমাদের একটা students টেবিল আছে
+
+```sql
+ region         | number_of_students    | country   |
+ -------------- | --------------------- | --------- |
+ Asia           | 100                   | India     |
+ Europe         | 150                   | Germany   |
+ Middle East    | 200                   | Qatar     |
+ Asia           | 250                   | Nepal     |
+ Europe         | 300                   | Belgium   |
+
+```
+
+এখন যদি আমরা জানতে চাই প্রতিটি region-এর মোট কতজন স্টুডেন্ট আছে (total student):
+
+```sql
+SELECT region, SUM(number_of_students) AS total_student
+FROM students
+GROUP BY region;
+```
+
+Output:
+
+```sql
+| region        | total_student |
+| ------------  | ------------  |
+| Asia          | 350           |
+| Middle East   | 200           |
+| Europe        | 450           |
+
+```
