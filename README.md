@@ -81,8 +81,8 @@ Example:
 
 ```
 
-    SELECT name, salary
-    FROM employees
-    WHERE salary > 50000 AND department = 'Sales';
+    SELECT name, age
+    FROM student
+    WHERE age > 18 AND department = 'engineering';
 
 ```
