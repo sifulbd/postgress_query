@@ -79,9 +79,7 @@ WHERE clause-এর ভিতরের condition বিভিন্ন operator 
 
 Example:
 
-<pre>```<sql>
-
-    SELECT name, age
+<pre>``` sql SELECT name, age
     FROM student
     WHERE age > 18 AND department = 'engineering';
 
